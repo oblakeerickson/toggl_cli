@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+require 'toggl_cli'
+
+@toggl_cli = TogglCLI.new
+
+command = ARGV[0]
+if !command
+  puts "Please specify a command"
+  exit 1
+end
+
+case command
+when 'start'
+  project = ARGV[1]
+  description = ARGV[2]
+  @toggl_cli.start(project, description)
+  puts "Timer Started"
+when 'stop'
+  @toggl_cli.stop
+  puts "Timer Stopped"
+else
+  puts "Uh-oh! I haven't learned that command yet"
+end
