@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'toggl_cli'
-  s.version = '0.0.0'
+  s.version = '1.0.0'
   s.files = ["lib/toggl_cli.rb"]
   s.summary = "A simple command line tool for toggl"
   s.authors = ["Blake Erickson"]

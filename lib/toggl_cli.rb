@@ -11,10 +11,6 @@ class TogglCLI
     @workspace_id = @workspaces.first['id']
   end
 
-  def self.hi
-    puts "hi"
-  end
-
   def start(project, description)
     pid = ""
     if @config['projects'][project]
