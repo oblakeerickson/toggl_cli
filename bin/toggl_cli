@@ -17,8 +17,8 @@ when 'start'
   @toggl_cli.start(project, description)
   puts "Timer Started"
 when 'stop'
-  @toggl_cli.stop
-  puts "Timer Stopped"
+  result = @toggl_cli.stop
+  puts "Timer Stopped. Duration: #{result['duration']}."
 else
   puts "Uh-oh! I haven't learned that command yet"
 end
