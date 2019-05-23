@@ -1,6 +1,7 @@
 require 'togglv8'
 require 'json'
 require 'yaml'
+require 'date'
 
 class TogglCLI
   def initialize
@@ -30,5 +31,18 @@ class TogglCLI
     if current
       result = @toggl_api.stop_time_entry(current['id'])
     end
+  end
+
+  def today
+    dates = {
+      start_date: Time.parse(Date.today.to_s).to_s,
+      end_date: Time.now.to_s
+    }
+    total = 0
+    result = @toggl_api.get_time_entries(dates)
+    result.each do |r|
+      total = total + r['duration']
+    end
+    (total / 60.0).round(2)
   end
 end

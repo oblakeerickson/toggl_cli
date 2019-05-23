@@ -18,8 +18,11 @@ when 'start'
   puts "Timer Started"
 when 'stop'
   result = @toggl_cli.stop
-  duration = result['duration'].to_i / 60
+  duration = (result['duration'].to_i / 60.0).round(2)
   puts "Timer Stopped. Duration: #{duration} minutes."
+when 'today'
+  result = @toggl_cli.today
+  puts "You have logged #{result} minutes or #{(result/60.0).round(2)} hours today"
 else
   puts "Uh-oh! I haven't learned that command yet"
 end
