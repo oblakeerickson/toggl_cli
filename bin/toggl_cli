@@ -12,17 +12,28 @@ end
 
 case command
 when 'start'
-  project = ARGV[1]
-  description = ARGV[2]
-  @toggl_cli.start(project, description)
+  client = ARGV[1]
+  project = ARGV[2]
+  description = ARGV[3]
+  @toggl_cli.start(client, project, description)
   puts "Timer Started"
 when 'stop'
   result = @toggl_cli.stop
   duration = (result['duration'].to_i / 60.0).round(2)
   puts "Timer Stopped. Duration: #{duration} minutes."
 when 'today'
-  result = @toggl_cli.today
-  puts "You have logged #{result} minutes or #{(result/60.0).round(2)} hours today"
+  client = ARGV[1]
+  result = @toggl_cli.today(client)
+  puts result[:entries]
+  puts "You have logged #{result[:total]} minutes or #{(result[:total]/60.0).round(2)} hours today"
+when 'clients'
+  result = @toggl_cli.clients
+  puts result
+when 'projects'
+  result = @toggl_cli.projects
+  result.each do |r|
+    puts "#{r['id']} #{r['cid']} #{r['name']}"
+  end
 else
   puts "Uh-oh! I haven't learned that command yet"
 end
